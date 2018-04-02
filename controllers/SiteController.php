@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Student;
 
 class SiteController extends Controller
 {
@@ -128,6 +129,7 @@ class SiteController extends Controller
 
     public function actionSay($target='World')
     {
-        return $this->render('say' , ['target' => $target]);
+        $studentList = Student::find()->orderBy('stu_id')->all();
+        return $this->render('say' , ['target' => $target , 'list' => $studentList]);
     }
 }

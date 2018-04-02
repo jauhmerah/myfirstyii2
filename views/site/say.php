@@ -2,6 +2,7 @@
 
 //use yii\helper\HtHtml::encode(ml;
 // Html::encode();
+use app\models\M_student;
 ?>
 <h1>Hello <?= $target ?></h1>
 <p>Welcome to your Yii2</p>
@@ -13,7 +14,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="btn-group btn-group-lg">
-              <button type="button" class="btn btn-primary">Add Student</button>
+              <button type="button" class="btn btn-primary"><i class="fas fa-plus" aria-hidden></i> Add Student</button>
             </div>
         </div>
     </div>
@@ -31,6 +32,24 @@
                 </tr>
               </thead>
               <tbody>
+                    <?php
+                        if (sizeof($list) == 0) {
+                            ?>
+                <tr>
+                    <td colspan="6" class="text-center"><strong>No Student Data</strong></td>
+                </tr>
+                            <?php
+                        }else{
+                            // foreach ($list as $key) {
+                            //     echo "<pre>";
+                            //     print_r($key);
+                            //     echo "</pre>";
+                            // }
+                            echo "<pre>";
+                            print_r($list);
+                            echo "</pre>";
+                        }
+                    ?>
                 <tr>
                   <td>1</td>
                   <td>Farid</td>
@@ -38,7 +57,8 @@
                   <td>Cs 250</td>
                   <td>asdfasdf</td>
                   <td><div class="btn-group btn-group-xs">
-                    <button type="button" class="btn btn-warning btn-circle"><i class="fa fa-pencil-alt"></i> Edit</button>
+                    <button type="button" class="btn btn-warning btn-circle" title="Edit"><i class="fa fa-pencil-alt"></i></button>
+                    <button type="button" class="btn btn-danger" title="Delete"><i class="fa fa-trash-alt"></i></button>
                   </div></td>
                 </tr>
               </tbody>
