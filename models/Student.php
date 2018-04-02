@@ -1,16 +1,75 @@
 <?php
+
 namespace app\models;
 
 use Yii;
-use yii\db\ActiveRecord;
 
 /**
- * LoginForm is the model behind the login form.
+ * This is the model class for table "student".
  *
- * @property User|null $user This property is read-only.
+ * @property int $stu_id
+ * @property string $stu_name
+ * @property string $stu_idNum
+ * @property int $pc_id Program Code
+ * @property string $stu_icNumber
  *
+ * @property ProgramCode $pc
  */
-class Student extends ActiveRecord
+class Student extends \yii\db\ActiveRecord
 {
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'student';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['stu_name', 'stu_idNum', 'pc_id', 'stu_icNumber'], 'required'],
+            [['stu_name'], 'string'],
+            [['pc_id'], 'integer'],
+            [['stu_idNum', 'stu_icNumber'], 'string', 'max' => 30],
+            [['pc_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProgramCode::className(), 'targetAttribute' => ['pc_id' => 'pc_id']],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'stu_id' => Yii::t('app', 'Stu ID'),
+            'stu_name' => Yii::t('app', 'Stu Name'),
+            'stu_idNum' => Yii::t('app', 'Stu Id Num'),
+            'pc_id' => Yii::t('app', 'Program Title'),
+            'stu_icNumber' => Yii::t('app', 'Stu Ic Number'),
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPc()
+    {
+        return $this->hasOne(ProgramCode::className(), ['pc_id' => 'pc_id']);
+    }
+
+    public function getPcDetail()
+    {
+        $arr = [];
+        $pc = $this->pc;
+        return $pc->pc_desc;
+        // $courses = $pc->getCourses();
+        // foreach ($courses as $course) {
+        //     $arr[] = $course->co_desc;
+        // }
+        // return $arr;
+    }
 }
-?>
