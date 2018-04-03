@@ -46,10 +46,11 @@ class Student extends \yii\db\ActiveRecord
     {
         return [
             'stu_id' => Yii::t('app', 'Stu ID'),
-            'stu_name' => Yii::t('app', 'Stu Name'),
-            'stu_idNum' => Yii::t('app', 'Stu Id Num'),
+            'stu_name' => Yii::t('app', 'Student Name'),
+            'stu_idNum' => Yii::t('app', 'Student Id Num'),
             'pc_id' => Yii::t('app', 'Program Title'),
-            'stu_icNumber' => Yii::t('app', 'Stu Ic Number'),
+            'stu_icNumber' => Yii::t('app', 'Student Ic Number'),
+            'co_id' => Yii::t('app', 'Course List'),
         ];
     }
 
@@ -60,6 +61,8 @@ class Student extends \yii\db\ActiveRecord
     {
         return $this->hasOne(ProgramCode::className(), ['pc_id' => 'pc_id']);
     }
+
+    
 
     public function getPcDetail()
     {

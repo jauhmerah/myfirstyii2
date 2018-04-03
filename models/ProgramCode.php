@@ -49,12 +49,12 @@ class ProgramCode extends \yii\db\ActiveRecord
     {
         return [
             'pc_id' => Yii::t('app', 'Pc ID'),
-            'pc_code' => Yii::t('app', 'Pc Code'),
-            'pc_desc' => Yii::t('app', 'Pc Desc'),
-            'pc_is_deleted' => Yii::t('app', 'Pc Is Deleted'),
-            'pc_created_at' => Yii::t('app', 'Pc Created At'),
-            'pc_updated_at' => Yii::t('app', 'Pc Updated At'),
-            'pc_created_by' => Yii::t('app', 'Pc Created By'),
+            'pc_code' => Yii::t('app', 'Program Code'),
+            'pc_desc' => Yii::t('app', 'Program Desc'),
+            'pc_is_deleted' => Yii::t('app', 'Program Is Deleted'),
+            'pc_created_at' => Yii::t('app', 'Program Created At'),
+            'pc_updated_at' => Yii::t('app', 'Program Updated At'),
+            'pc_created_by' => Yii::t('app', 'Program Created By'),
         ];
     }
 
@@ -72,5 +72,17 @@ class ProgramCode extends \yii\db\ActiveRecord
     public function getStudents()
     {
         return $this->hasMany(Student::className(), ['pc_id' => 'pc_id']);
+    }
+
+    public static function dropdown()
+    {
+        //get and cache data
+        $dropdown = [];
+            //get all records from database and generate
+            $models = self::find()->all();
+            foreach ($models as $model) {
+                $dropdown[$model->pc_id] = $model->pc_desc;
+            }
+        return $dropdown;
     }
 }

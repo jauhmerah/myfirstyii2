@@ -6,19 +6,17 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Student */
 /* @var $form yii\widgets\ActiveForm */
+use app\models\ProgramCode;
 ?>
-
 <div class="student-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'stu_id')->textInput() ?>
 
     <?= $form->field($model, 'stu_name')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'stu_idNum')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'pc_id')->textInput() ?>
+    <?= $form->field($model, 'pc_id')->dropDownList(ProgramCode::dropdown()); ?>
 
     <?= $form->field($model, 'stu_icNumber')->textInput(['maxlength' => true]) ?>
 

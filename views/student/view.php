@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Course;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Student */
@@ -31,8 +32,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'stu_id',
             'stu_name:ntext',
             'stu_idNum',
-            'pc_id',
+            [
+                'attribute' => 'pc_id',
+                'format' => 'raw',
+                'value' => function($model){
+                    return $model->getPcDetail();
+                }
+            ],
             'stu_icNumber',
+            [
+                'attribute' => 'co_id',
+                'format' => 'raw',
+                'value' => function($model){
+                    return Course::getAllCourse($model->pc_id);
+                }
+            ],
         ],
     ]) ?>
 

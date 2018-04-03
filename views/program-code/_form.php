@@ -16,13 +16,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'pc_desc')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'pc_is_deleted')->textInput() ?>
+    <?= $form->field($model, 'pc_created_at')->hiddenInput(['value' => date('Y-m-d H:i:s')])->label(FALSE) ?>
 
-    <?= $form->field($model, 'pc_created_at')->textInput() ?>
-
-    <?= $form->field($model, 'pc_updated_at')->textInput() ?>
-
-    <?= $form->field($model, 'pc_created_by')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
